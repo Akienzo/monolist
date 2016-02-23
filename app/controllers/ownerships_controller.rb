@@ -3,6 +3,7 @@ class OwnershipsController < ApplicationController
 
   def create
     if params[:asin]
+      #Itemをasinという値で検索して、存在する場合はそのデータを返し、それ以外は与えた値(今回はasin)でItem.newした状態のItemモデルを返します。
       @item = Item.find_or_initialize_by(asin: params[:asin])
     else
       @item = Item.find(params[:item_id])
@@ -10,9 +11,11 @@ class OwnershipsController < ApplicationController
 
     # itemsテーブルに存在しない場合はAmazonのデータを登録する。
     if @item.new_record?
+      #begin～rescue～endで囲われた部分は例外処理を行っています。begin〜rescueで囲まれた箇所のコードを実行している時にエラーが発生した場合に例外を取得する
       begin
         # TODO 商品情報の取得 Amazon::Ecs.item_lookupを用いてください
         response = {}
+      #rescue Amazon::RequestError => eと記述することにより、Amazon::RequestErrorが発生した場合には変数eにエラーオブジェクトを格納し、rescue〜endの部分が実行されます。
       rescue Amazon::RequestError => e
         return render :js => "alert('#{e.message}')"
       end

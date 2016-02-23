@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show]
 
   def new
+    #検索ワード(name=q)を指定した時はAPIを用いて、@amazon_itemsという変数に商品検索結果を渡しています。
     if params[:q]
       response = Amazon::Ecs.item_search(params[:q] , 
                                   :search_index => 'All' , 
