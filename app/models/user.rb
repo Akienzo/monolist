@@ -40,11 +40,12 @@ class User < ActiveRecord::Base
 
   ## TODO 実装
   def have(item)
-    haves.find_or_create_by(item_id: item.id)
+    haves.find_or_create_by(item_id:item.id)
   end
 
   def unhave(item)
-    haves.find_by(item_id: item.id).destroy
+    have = haves.find_by(item_id:item.id)
+    have.destroy if have
   end
 
   def have?(item)
@@ -53,11 +54,12 @@ class User < ActiveRecord::Base
 
   def want(item)
     # want.rbに紐づけるのかなと上記でhas_many :wants, class_name: "Want", foreign_key: "user_id", dependent: :destroyとあるのでwantsかなと考えました
-    wants.find_or_create_by(item_id: item.id)
+    wants.find_or_create_by(item_id:item.id)
   end
 
   def unwant(item)
-    wants.find_by(item_id: item.id).destroy
+    want = wants.find_by(item_id:item.id)
+    want.destroy if want
   end
 
   def want?(item)
@@ -79,4 +81,8 @@ end
     # def unfollow(other_user)
     #   following_relationship = following_relationships.find_by(followed_id: other_user.id)
     #   following_relationship.destroy if following_relationship
+    # end
+    
+    # def have(item)
+    # haves.find_or_create_by(item_id: item.id)
     # end

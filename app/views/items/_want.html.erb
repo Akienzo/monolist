@@ -1,4 +1,7 @@
-<%= link_to "" , ownerships_path(item_id: item.id , type: "Want") ,
+<%= link_to "" , ownerships_path(asin:item.asin, type: "Want") ,
     :class => "want-#{item.id} btn-want btn btn-danger btn-sm want",
-    :remote => true,
-    :method => :post %>
+    :remote => true %>
+    
+    
+    <!--item_id: item.id ,-->
+    <!--:method => :post-->
