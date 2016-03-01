@@ -4,11 +4,16 @@
       <div class="image">
         <div class="img-wrap">
           <% #TODO 商品イメージ %>
-          <%= image_tag("no-image.png" , alt: @item.title) %>
+          <% if @item.large_image.present? %>
+            <%= image_tag(@item.large_image, alt: @item.title) %>
+          <% else %>
+            <%= image_tag("no-image.png" , alt: @item.title) %>
+          <% end %>
         </div>
       </div>
       <div class="title">
         <% #TODO 商品タイトル %>
+        <%= @item.title %>
         仮タイトル
       </div>
       <%= render 'action' , item: @item %>
@@ -18,18 +23,27 @@
         <h4 class="side-box-title">Haveしたユーザー</h4>
         <div class="side-box-body">
           <% # TODO Haveしたユーザー一覧 %>
-
+          <% if @have_users %>
+            <% @have_users.each do |have_user| %>
+              <%= link_to (gravatar_for have_user, size: 30), have_user %>
+            <% end %>
+          <% end %>
         </div>
       </div>
       <div class="side-box">
         <h4 class="side-box-title">Wantしたユーザー</h4>
         <div class="side-box-body">
           <% # TODO Wantしたユーザー一覧 %>
+          <% if @want_users %>
+            <% @want_users.each do |want_user| %>
+              <%= link_to (gravatar_for want_user, size: 30), want_user %>
+            <% end %>
+          <% end %>
         </div>
       </div>
       <div class="text-center">
         <% #TODO 正しいリンク先に %>
-        <%= link_to(image_tag("amazon-button.png", {alt: "Amazon詳細ページへ"}), '#') %>
+        <%= link_to(image_tag("amazon-button.png", {alt: "Amazon詳細ページへ"}), @item.detail_page_url) %>
       </div>
     </div>
   </div>
