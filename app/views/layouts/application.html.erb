@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <% if content_for?(:head) %>
-    <%= yield :head %>
+  <%# if content_for?(:head) %>
+    <%#= yield :head %>
+  <% if content_for?(:title) %>
+    <title><%= yield :title %></title>
   <% else %>
     <title>Monolist</title>
+  <% end %>
+  <% if content_for?(:description) %>
+    <meta name="description" <%= yield :description %> >
   <% end %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>

@@ -1,3 +1,11 @@
+<% content_for :title do %>
+ユーザ一詳細ページ
+<% end %>
+
+<% content_for :description do %>
+ [ユーザ名]のモノページ。Hanakoの欲しいモノ、持ってるモノを表示しています。
+<% end %>
+
 <%= render 'profile' , user: @user %>
 
 
