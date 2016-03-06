@@ -1,0 +1,38 @@
+<% content_for :title do %>
+欲しいものランキング詳細ページ
+<% end %>
+
+<% content_for :description do %>
+ [商品ランキング]のページ。欲しいモノのランキングを表示しています。
+<% end %>
+
+<div class="container">
+  <div class="container-inner inner-default clearfix">
+    <% @item_counts.each.with_index(1) do |(item_id, count), rank| %>
+    <% item = @items.find(item_id) %>
+      <div class="item-box">
+        <div class="detail">
+          <%=  "#{rank} 番人気です" %>
+          <%=  "Want数は#{count}個です。" %>
+        </div>
+        <div class="image">
+          <div class="img-wrap">
+             <% if item.large_image.present? %>
+                <%= image_tag(item.large_image , alt: item.title) %>
+              <% else %>
+                <%= image_tag("no-image.png" , alt: item.title) %>
+              <% end %>
+          </div>
+          </div>
+        <div class="detail">
+            <p class="title">
+            <%= item.title %>
+            </p>
+        </div>
+        <%= render 'items/action' , item: item if logged_in? %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+

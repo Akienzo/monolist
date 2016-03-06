@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get    'signup', to: 'users#new'
   get    'login' , to: 'sessions#new'
   get    'ownerships' , to: 'ownerships#create'
+  get    'ranking/have'
+  get    'ranking/want'
   post   'login' , to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
 
